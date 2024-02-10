@@ -7,6 +7,7 @@ if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
 import pandas as pd
+from datetime import datetime
 
 @data_loader
 def load_data(*args, **kwargs):
@@ -28,7 +29,10 @@ def load_data(*args, **kwargs):
 
     final_data = pd.concat(dfs)
 
-    print(final_data)
+    final_data['lpep_pickup_datetime'] = final_data['lpep_pickup_datetime'].dt.date
+    final_data['lpep_dropoff_datetime'] = final_data['lpep_dropoff_datetime'].dt.date
+    
+    return(final_data)
 
 ```
 
